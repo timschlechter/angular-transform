@@ -16,8 +16,8 @@ define(
          * Example:
          *
          *   it.cases(
-         *       { param: 1, expected: 1, description: '1 should equal 1' },
-         *       { param: 2, expected: 2, description: '2 should equal 2' },
+         *       { description: '1 should equal 1', param: 1, expected: 1 },
+         *       { description: '2 should equal 2', param: 2, expected: 2 },
          *       function (param, expected) {
          *           expect(param).toBe(expected);
          *       }
@@ -31,6 +31,7 @@ define(
                 var description = testcase.description || "!!! Add a description property to your testcase object !!!";
                 it(description, function() {
                     var args = _.map(testcase);
+                    args.shift();
                     testFn.apply(this, args);
                 });
             }, this);
@@ -38,31 +39,75 @@ define(
 
         describe('angularTransform', function() {
 
-            describe('to XML', function() {
+            describe('to Plain Text', function() {
+                it.cases({
+                        description: 'no data and no template',
+                        config: {},
+                        expected: '',
+                    },
+                    {
+                        description: 'no data',
+                        config: {
+                            template: 'template'
+                        },
+                        expected: 'template',
+                    },
+                    {
+                        description: 'no template',
+                        config: {
+                            data: {
+                                value: 1
+                            }
+                        },
+                        expected: '',
+                    },
+                    {
+                        description: 'render value in text',
+                        config: {
+                            data: {
+                                value: 1
+                            },
+                            template: "template nr: {{value}}"
+                        },
+                        expected: 'template nr: 1',
+                    },
+                    function(config, expected) {
+                        var result = angularTransform(config);
+                        result = result.replace(/\>[\n\t ]+</g, '><');
+                        expect(result).toBe(expected);
+                    }
+                );
+            });
+
+            describe('to Xml', function() {
                 it.cases({
                         description: 'no data',
                         config: {
-                            template: '<?xml version="1.0" encoding="UTF-8"?>'
+                            template: '<?xml version="1.0" encoding="UTF-8"?>',
+                            output: { format: "xml" }
                         },
                         expected: '<?xml version="1.0" encoding="UTF-8"?>'
                     }, {
-                        description: 'render value in element',
+                        description: 'render in element',
                         config: {
                             data: {
-                                key: 'value'
+                                value: 1
                             },
-                            template: '<?xml version="1.0" encoding="UTF-8"?><key><at>{{key}}</at></key>'
+                            template: '<?xml version="1.0" encoding="UTF-8"?><value><at>{{value}}</at></value>',
+                            output: { format: "xml" }
                         },
-                        expected: '<?xml version="1.0" encoding="UTF-8"?><key>value</key>'
+                        expected: '<?xml version="1.0" encoding="UTF-8"?><value>1</value>'
                     }, {
-                        description: 'render value in attribute',
+                        description: 'render in attribute',
                         config: {
                             data: {
-                                key: 'value'
+                                value: 1
                             },
-                            template: '<?xml version="1.0" encoding="UTF-8"?><key value="{{key}}"></key>'
+                            template: '<?xml version="1.0" encoding="UTF-8"?><value is="{{value}}"></value>',
+                            output: { format: "xml" }
                         },
-                        expected: '<?xml version="1.0" encoding="UTF-8"?><key value="value"></key>'
+                        expected: '<?xml version="1.0" encoding="UTF-8"?><value is="1"></value>'
+                        
                     },
                     function(config, expected) {
                         var result = angularTransform(config);

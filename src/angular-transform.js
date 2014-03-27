@@ -16,10 +16,11 @@
     var angularTransform = function(config) {
         // get config values
         var data = config.data,
-            template = config.template;
+            template = config.template,
+            output = config.output || {};
 
         // bootstrap the application
-        var doc = angular.element('<at ng-app>' + template + '</at>'),
+        var doc = angular.element('<at ng-app>' + (template || '') + '</at>'),
             app = angular.bootstrap(doc, ['angular-transform-app']),
             scope = doc.scope();
 
@@ -41,8 +42,11 @@
         result = result.replace(/\s*<!-- ng(.*?) -->/g, '');
         result = result.replace(/<!-- end ng(.*?) -->/g, '');
 
-        // fix processing instructions
-        result = result.replace(/\s*<!--\?(.*?)\?-->/g, '<?$1?>');
+        // XML post processing
+        if (output.format == "xml") {
+            // fix processing instructions
+            result = result.replace(/\s*<!--\?(.*?)\?-->/g, '<?$1?>');
+        }
 
         return result;
     };
