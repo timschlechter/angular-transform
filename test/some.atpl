@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<company>
+    <name><at>{{company}}</at></name>
+    <at ng-if="employees.length">
+        <employees>
+            <at ng-repeat="employee in employees">
+                <employee>
+                    <name><at>{{employee.name}}</at></name>
+                    <age><at>{{employee.age}}</at></age>
+                </employee>
+            </at>
+        </employees>
+    </at>
+</company>
