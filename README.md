@@ -18,6 +18,9 @@ Why not trying to use all this stuff to transform JSON to... any text format?
 
 Maybe we don't get the performance we can get using XSLT or the streaming capabilities, but I think for most use cases using AngularJS will be sufficient. And next to NodeJS and browsers, it shouldn't be that hard to make this useable in other environments like .Net or Java.
 
+## But first...
+To avoid any confusion: this is __not__ an AngularJS module which you could use in your AngularJS application. This library exposes a transform-function, which bootstraps a AngularJS app. This app is used to perform the transformation.
+
 ## This will look something like...
 Well this is a fairly simple example, but you get the idea.
 
