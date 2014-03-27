@@ -28,7 +28,7 @@ Well this is a fairly simple example, but you get the idea.
 <pre>
 	var data = {
 		company: "Some Company",
-		array: [
+		employees: [
 			{ name: 'Jack', age: '31'},
 			{ name: 'Jill', age: '29'}
 		]
