@@ -1,44 +1,7 @@
 (function(global, angular) {
     'use strict';
 
-    var tranform = function(data, template) {
-        var doc = angular.element('<at ng-app ng-controller="AngularTransformRuntimeAppController">' + template + '</at>');
-
-        angular.module('angular-transform-runtime-app', ['angular-transform'])
-            .controller('AngularTransformRuntimeAppController', ['$scope',
-                function($scope) {
-                    // place data on scope
-                    for (var name in data) {
-                        if (data.hasOwnProperty(name)) {
-                            $scope[name] = data[name];
-                        }
-                    }
-                }
-            ]);
-
-        try {
-            angular.bootstrap(doc, ['angular-transform-runtime-app']);
-
-            var result = doc[0].outerHTML;
-
-            // remove angular-transform directives
-            result = result.replace(/\s*<\/?at[^>]*>/g, '');
-
-            // remove comments added by angular directives
-            result = result.replace(/\s*<!-- ng(.*?) -->/g, '');
-            result = result.replace(/<!-- end ng(.*?) -->/g, '');
-
-            // fix processing instructions
-            result = result.replace(/\s*<!--\?(.*?)\?-->/g, '<?$1?>');
-
-
-            return result;
-        } finally {
-            // TODO: destroy/cleanup the created angular.module('angular-transform-runtime-app')?
-        }
-    };
-
-    angular.module('angular-transform', []).directive('at', [
+    angular.module('angular-transform-app', []).directive('at', [
         function() {
             return {
                 restrict: 'E',
@@ -50,14 +13,48 @@
         }
     ]);
 
+    var angularTransform = function(config) {
+        // get config values
+        var data = config.data,
+            template = config.template;
+
+        // bootstrap the application
+        var doc = angular.element('<at ng-app>' + template + '</at>'),
+            app = angular.bootstrap(doc, ['angular-transform-app']),
+            scope = doc.scope();
+
+        // put data on scope
+        for (var name in data) {
+            if (data.hasOwnProperty(name)) {
+                scope[name] = data[name];
+            }
+        }
+
+        // Transform and get the result string
+        scope.$apply();
+        var result = doc[0].outerHTML;
+
+        // remove angular-transform directives
+        result = result.replace(/\s*<\/?at[^>]*>/g, '');
+
+        // remove comments added by angular directives
+        result = result.replace(/\s*<!-- ng(.*?) -->/g, '');
+        result = result.replace(/<!-- end ng(.*?) -->/g, '');
+
+        // fix processing instructions
+        result = result.replace(/\s*<!--\?(.*?)\?-->/g, '<?$1?>');
+
+        return result;
+    };
+
     // Expose angular-transform depending on runtime environment: NodeJS, AMD or global scope
     if (typeof exports !== "undefined") {
-        exports["angularTransform"] = transform;
+        exports["angularTransform"] = angularTransform;
     } else if (typeof define === 'function') {
         define(function() {
-            return tranform;
+            return angularTransform;
         });
     } else {
-        global.angularTransform = tranform;
+        global.angularTransform = angularTransform;
     }
 })(this, this.angular);
