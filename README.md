@@ -1,4 +1,4 @@
-# Transform JSON to *any text format*
+# Transform JSON to *any* text format [![Build Status](https://travis-ci.org/TimSchlechter/angular-transform.png?branch=master)](https://travis-ci.org/TimSchlechter/angular-transform)
 
 <blockquote>"Who likes writing XSLT, please raise hands?"</blockquote>
 <blockquote>"...and who likes maintaining XSLT?"</blockquote>
