@@ -9,13 +9,14 @@ At this moment, there probably aren't that many hands left raised. Writing, main
 ## Wouldn't it be nice...
 ...if we could transform data using the simplicity and power of AngularJS? Think about it:
 * Nowadays most of our data is available in JSON, we loooove JSON
-* Javascript is gaining more and more popularity, it runs both in client browsers as standalone using NodeJS
+* Javascript is gaining more and more popularity, it runs both in client browsers as standalone using NodeJS.
 * AngularJS offers enormous power, simplicity and testability
-* Binding data to a template is very easy when using AngularJS
+* Binding JSON to a template is very easy when using AngularJS
+* Easy to extend by using your own directives, filter and controllers in templates
 
 Why not trying to use all this stuff to transform JSON to... any text format?
 
-Maybe we don't get the performance we can get using XSLT or the streaming capabilities, but I think for most use cases using AngularJS will be sufficient.
+Maybe we don't get the performance we can get using XSLT or the streaming capabilities, but I think for most use cases using AngularJS will be sufficient. And next to NodeJS and browsers, it shouldn't be that hard to make this useable in other environments like .Net or Java.
 
 ## This will look something like...
 Well this is a fairly simple example, but you get the idea.
