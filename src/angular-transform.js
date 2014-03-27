@@ -1,23 +1,24 @@
 (function(global, angular) {
     'use strict';
-
-    angular.module('angular-transform-app', []).directive('at', [
-        function() {
-            return {
-                restrict: 'E',
-                replace: false,
-                link: function($scope, element, attrs) {
-
-                }
-            };
-        }
-    ]);
-
+    
     var angularTransform = function(config) {
         // get config values
         var data = config.data,
             template = config.template,
-            output = config.output || {};
+            output = config.output || {},
+            modules = config.modules || [];
+
+        angular.module('angular-transform-app', modules).directive('at', [
+            function() {
+                return {
+                    restrict: 'E',
+                    replace: false,
+                    link: function($scope, element, attrs) {
+
+                    }
+                };
+            }
+        ]);
 
         // bootstrap the application
         var doc = angular.element('<at ng-app>' + (template || '') + '</at>'),
