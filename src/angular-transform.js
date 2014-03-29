@@ -1,5 +1,6 @@
 (function(global, angular) {
     'use strict';
+
     var regex = {
         angularTransformDirectives: /<\/?at ?(?:.|\n)*?>/g,
         angularDirectiveComments: /<!-- (end )?ng(.*?) -->/g,
@@ -7,7 +8,7 @@
         tags: /<((.|\n)*?)>/g,
         encodedTags: /&lt;((.|\n)*?)&gt;/g
     };
-    
+
     function angularTransform(config) {
         config = config || {};
 
@@ -17,26 +18,14 @@
             output = config.output || {},
             modules = config.modules || [];
 
-        angular.module('angular-transform-app', modules).directive('at', [
-            function() {
-                return {
-                    restrict: 'E',
-                    replace: false,
-                    link: function($scope, element, attrs) {
-
-                    }
-                };
-            }
-        ]);
-
-        // encode template before processing it by Angular
-        template = encode(template);
         // bootstrap the application
-        var doc = angular.element('<at ng-app>' + template + '</at>'),
-            app = angular.bootstrap(doc, ['angular-transform-app']),
-            scope = doc.scope();
-
-        // put data on scope
+        var doc = angular.element('<at ng-app>' + encode(template) + '</at>');
+        modules.push('angular-transform-utilities');
+        angular.module('angular-transform-app', modules);
+        angular.bootstrap(doc, ['angular-transform-app']);
+            
+        // place data on scope
+        var scope = doc.scope();
         for (var name in data) {
             if (data.hasOwnProperty(name)) {
                 scope[name] = data[name];
@@ -79,6 +68,32 @@
 
         return value;
     }
+
+    /**
+     * Module which provided utilities to be used in plugins
+     */
+    angular.module('angular-transform-utilities', [])
+        .directive('at', [
+            function() {
+                return {
+                    restrict: 'E',
+                    replace: false,
+                    link: function($scope, element, attrs) { }
+                };
+            }
+        ])
+        .factory('encoder', [
+            '$templateCache',
+            function ($templateCache) {
+                return {
+                    encodeTemplate: encode,
+                    encodeTemplateUrl: function(templateUrl) {
+                        var template = $templateCache.get(templateUrl);
+                        return this.encodeTemplate(template);
+                    }
+                };
+            }
+        ]);
 
     // Expose angular-transform depending on runtime environment: NodeJS, AMD or global scope
     if (typeof exports !== "undefined") {
