@@ -39,6 +39,40 @@ define(
 
         describe('angularTransform', function() {
 
+            describe('template contains', function() {
+                it.cases(
+                    {   description: 'comment like AngularJS directives generate',
+                        config: { template: '<!-- ngIf -->'}
+                    },
+                    {   description: 'tag containing colon',
+                        config: { template: '<some:tag>inner</some:tag>' }
+                    },
+                    {   description: 'tag containing trailing digit',
+                        config: { template: '<tag1>inner</tag1>' }
+                    },
+                    {   description: 'tag containing digit',
+                        config: { template: '<tag1tag>inner</tag1tag>' }
+                    },
+                    {   description: 'tag containing starting digit',
+                        config: { template: '<1tag>inner</1tag>' }
+                    },
+                    {   description: 'tag',
+                        config: { template: '<tag>inner</tag>' }
+                    },
+
+                    {   description: 'tag containing dot',
+                        config: { template: '<ta.g>inner</ta.g>' }
+                    },
+                    {   description: 'processing instruction',
+                        config: { template: '<?xml version="1.0" encoding="UTF-8"?>' }
+                    },
+                    function(config) {
+                        var result = angularTransform(config);
+                        expect(result).toBe(config.template);
+                    }
+                );
+            });
+
             describe('to Plain Text', function() {
                 it.cases({
                         description: 'no data and no template',
