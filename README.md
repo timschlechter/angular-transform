@@ -55,7 +55,10 @@ Well this is a fairly simple example, but you get the idea.
 
 ### Transform:
 <pre>
-var result = angularTransform(data, template);
+var result = angularTransform({
+    data: data,
+    template: template
+});
 </pre>
 
 ### Result:
