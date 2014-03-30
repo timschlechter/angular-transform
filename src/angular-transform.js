@@ -91,9 +91,9 @@
             function ($templateCache) {
                 return {
                     prepareTemplate: encodeTemplate,
-                    prepareTemplateUrl: function(templateUrl) {
+                    getPreparedTemplate: function(templateUrl) {
                         var template = $templateCache.get(templateUrl);
-                        return this.encodeTemplate(template);
+                        return this.prepareTemplate(template);
                     }
                 };
             }
