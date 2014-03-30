@@ -3,7 +3,6 @@
 ## Features:
 * 1 function which transforms JSON to __any text format__
 * Use the __full power of AngularJS__ (templates, directives, filters, services, controllers)
-* Use the __full power of Javascript__ in your transformations
 * Extendable: easy to write your own plugins. Checkout the [MS Word 2003 plugin](https://github.com/TimSchlechter/angular-transform-msword2003) which is currently used to test out these things
 * Very testable! Just use the testtools you allready know to write your Javascript tests
 
