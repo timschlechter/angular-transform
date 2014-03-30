@@ -15,6 +15,7 @@ module.exports = function(config) {
         // list of files / patterns to load in the browser
         files: [
             { pattern: 'bower_components/angular/angular.min.js', included: true },
+            { pattern: 'node_modules/jasmine.testcases/src/jasmine.testcases.js', included: true },
             { pattern: 'node_modules/lodash/lodash.js', included: false },
             { pattern: 'node_modules/text/text.js', included: false },
             { pattern: 'src/**/*.*', included: false },

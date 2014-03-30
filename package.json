@@ -13,6 +13,7 @@
     "requirejs": "~2.1.11",
     "lodash": "~2.4.1",
     "text": "git+https://github.com/requirejs/text.git",
+    "jasmine.testcases": "git+https://github.com/TimSchlechter/jasmine.testcases.git",
     "karma": "~0.12.1",
     "karma-jasmine": "~0.1.5",
     "karma-requirejs": "~0.2.1",

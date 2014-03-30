@@ -7,36 +7,6 @@ define(
     function(angularTransform, template, _) {
         'use strict';
 
-        /**
-         * Creates multiple specs at once, which execute the same test code but with
-         * different params. The last argument should contain a function which contains
-         * the test code. All params before this function are objects containing the
-         * params which are passed to the testcases.
-         *
-         * Example:
-         *
-         *   it.cases(
-         *       { description: '1 should equal 1', param: 1, expected: 1 },
-         *       { description: '2 should equal 2', param: 2, expected: 2 },
-         *       function (param, expected) {
-         *           expect(param).toBe(expected);
-         *       }
-         *   );
-         */
-        it.cases = function() {
-            var testFn = arguments[arguments.length - 1];
-            var testcases = _.map(_.without(arguments, testFn));
-
-            _.each(testcases, function(testcase) {
-                var description = testcase.description || "!!! Add a description property to your testcase object !!!";
-                it(description, function() {
-                    var args = _.map(testcase);
-                    args.shift();
-                    testFn.apply(this, args);
-                });
-            }, this);
-        };
-
         describe('angularTransform', function() {
 
             describe('template contains', function() {
