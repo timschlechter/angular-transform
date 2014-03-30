@@ -1,13 +1,22 @@
 # Transform JSON to *any* text format [![Build Status](https://travis-ci.org/TimSchlechter/angular-transform.png?branch=master)](https://travis-ci.org/TimSchlechter/angular-transform)
 
+## Features:
+* 1 function which transforms JSON to __any text format__
+* Use the __full power of AngularJS__ (templates, directives, filters, services, controllers)
+* Use the __full power of Javascript__ in your transformations
+* Extendable: easy to write your own plugins. Checkout the [MS Word 2003 plugin](https://github.com/TimSchlechter/angular-transform-msword2003) which is currently used to test out these things
+* Very testable! Just use the testtools you allready know to write your Javascript tests
+
+## Why?
 <blockquote>"Who likes writing XSLT, please raise hands?"</blockquote>
 <blockquote>"...and who likes maintaining XSLT?"</blockquote>
 <blockquote>"...and who likes testing XSLT?"</blockquote>
 
-At this moment, there probably aren't that many hands left raised. Writing, maintaining and testing XSLT is pretty hard.
+At this moment, there probably aren't that many raised hands left.XSLT is very powerfull, but writing, maintaining and testing it is pretty hard.
 
-## Wouldn't it be nice...
+# Wouldn't it be nice...
 ...if we could transform data using the simplicity and power of AngularJS? Think about it:
+
 * Nowadays most of our data is available in JSON, we loooove JSON
 * Javascript is gaining more and more popularity, it runs both in client browsers as standalone using NodeJS.
 * AngularJS offers enormous power, simplicity and testability
