@@ -59,7 +59,7 @@
     }
 
     function encodeTemplate(template) {
-        return '<at ng-app>' + encode(template) + '</at>';
+        return '<at>' + encode(template) + '</at>';
     }
 
     function decode(value) {
