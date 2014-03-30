@@ -8,7 +8,6 @@ before_script:
   - npm install -g karma
   - npm install -g bower
   - bower install
-  - npm install
 
 script:
-  - karma start --no-auto-watch --single-run --reporters dots --browsers Firefox
+  - ./node_modules/.bin/karma start --no-auto-watch --single-run --reporters dots --browsers Firefox
