@@ -86,12 +86,12 @@
                 };
             }
         ])
-        .factory('encoder', [
+        .factory('atService', [
             '$templateCache',
             function ($templateCache) {
                 return {
-                    encodeTemplate: encodeTemplate,
-                    encodeTemplateUrl: function(templateUrl) {
+                    prepareTemplate: encodeTemplate,
+                    prepareTemplateUrl: function(templateUrl) {
                         var template = $templateCache.get(templateUrl);
                         return this.encodeTemplate(template);
                     }
