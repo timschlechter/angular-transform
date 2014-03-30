@@ -88,12 +88,4 @@ npm test
 </pre>
 
 ## Dependencies
-Runtime:
 * AngularJS
-
-Development: 
-* Bower
-* Karma
-* AngularJS
-* LoDash
-* RequireJS
