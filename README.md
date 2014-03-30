@@ -50,10 +50,9 @@ Well this is a fairly simple example, but you get the idea.
 	&lt;name&gt;&lt;at&gt;{{company}}&lt;/at&gt;&lt;/name&gt;
 	&lt;at ng-if="employees.length"&gt;
 		&lt;employees&gt;
-			&lt;at ng-repeat="employee in employees"&gt;
+			&lt;at ng-repeat="employee in employees | orderBy:'age'"&gt;
 				&lt;employee&gt;
-					&lt;name&gt;&lt;at&gt;{{employee.name}}&lt;/at&gt;&lt;/name&gt;
-					&lt;age&gt;&lt;at&gt;{{employee.age}}&lt;/at&gt;&lt;/age&gt;
+					&lt;name age="{{age}}"&gt;&lt;at&gt;{{employee.name}}&lt;/at&gt;&lt;/name&gt;
 				&lt;/employee&gt;
 			&lt;/at&gt;
 		&lt;/employees&gt;
@@ -76,13 +75,11 @@ var result = angularTransform({
 	&lt;name&gt;Some Company&lt;/name&gt;
 	&lt;employees&gt;
 		&lt;employee&gt;
-			&lt;name&gt;Jack&lt;/name&gt;
-			&lt;age&gt;31&lt;/age&gt;
+			&lt;name age="29"&gt;Jill&lt;/name&gt;
 		&lt;/employee&gt;
 		&lt;employee&gt;
-			&lt;name&gt;Jill&lt;/name&gt;
-			&lt;age&gt;29&lt;/age&gt;
-		&lt;/employee&gt;
+			&lt;name age="31"&gt;Jack&lt;/name&gt;
+		&lt;/employee&gt;		
 	&lt;/employees&gt;
 &lt;/company&gt;
 </pre>

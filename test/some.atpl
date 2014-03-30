@@ -3,10 +3,9 @@
     <name><at>{{company}}</at></name>
     <at ng-if="employees.length">
         <employees>
-            <at ng-repeat="employee in employees">
+            <at ng-repeat="employee in employees | orderBy:'age'">
                 <employee>
-                    <name><at>{{employee.name}}</at></name>
-                    <age><at>{{employee.age}}</at></age>
+                    <name age="{{employee.age}}"><at>{{employee.name}}</at></name>
                 </employee>
             </at>
         </employees>
