@@ -1,4 +1,4 @@
-# Transform JSON to *any* text format [![Build Status](https://travis-ci.org/TimSchlechter/angular-transform.png?branch=master)](https://travis-ci.org/TimSchlechter/angular-transform)
+# Transform JSON to *any* text format [![Build Status](https://travis-ci.org/timschlechter/angular-transform.png?branch=master)](https://travis-ci.org/TimSchlechter/angular-transform)
 
 ## Features:
 * 1 function which transforms JSON to __any text format__
